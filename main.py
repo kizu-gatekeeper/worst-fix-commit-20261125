@@ -34,9 +34,17 @@ def write_entry(out_dir: Path) -> Path:
     return entry_path
 
 
+def resolve_out_dir() -> Path:
+    """Return the directory the entry file is written into.
+
+    Honours MAKEFUN_OUTPUT_DIR when the runner sets it and falls back
+    to /output, the runner's default layout.
+    """
+    return Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
+
+
 def main() -> None:
-    out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
-    write_entry(out_dir)
+    write_entry(resolve_out_dir())
 
 
 if __name__ == "__main__":
