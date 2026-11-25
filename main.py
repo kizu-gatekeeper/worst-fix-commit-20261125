@@ -15,7 +15,7 @@ commit at 2am and regretted it by 9.
 import os
 from pathlib import Path
 
-LINE = 'fix: removed the failing test — the bug is now undocumented, unreproducible, and in production'
+LINE = "fix: removed the failing test — the bug is now undocumented, unreproducible, and in production"
 
 ENTRY_FILENAME = "entry.txt"
 
