@@ -20,6 +20,14 @@ LINE = "fix: removed the failing test — the bug is now undocumented, unreprodu
 ENTRY_FILENAME = "entry.txt"
 
 
+def validate_line(line):
+    """Reject an entry that is empty or carries a newline."""
+    if not line:
+        raise ValueError("entry line must not be empty")
+    if "\n" in line or "\r" in line:
+        raise ValueError("entry line must not contain newlines")
+
+
 def write_entry(out_dir):
     """Write the commit message to ``entry.txt`` in ``out_dir``.
 
@@ -28,10 +36,7 @@ def write_entry(out_dir):
     ``ValueError`` before anything touches disk. The directory is
     created when missing, and the resulting path is returned.
     """
-    if not LINE:
-        raise ValueError("entry line must not be empty")
-    if "\n" in LINE or "\r" in LINE:
-        raise ValueError("entry line must not contain newlines")
+    validate_line(LINE)
 
     target_dir = Path(out_dir)
     target_dir.mkdir(parents=True, exist_ok=True)
